@@ -1,0 +1,9 @@
+{
+  "base_url": "/",
+  "site_title": "BlitzJS Blog",
+  "site_description": "Blog description",
+  "site_keywords": [{ "keyword": "blitzjs" }],
+  "posts_per_page": 10,
+  "twitter_account": "asd",
+  "github_account": "asd"
+}
