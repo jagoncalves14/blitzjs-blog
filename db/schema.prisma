@@ -1,32 +1,38 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-datasource db {
+datasource sqlite {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./db.sqlite"
 }
+
+// SQLite is easy to start with, but if you use Postgres in production
+// you should also use it in development with the following:
+//datasource postgresql {
+//  provider = "postgresql"
+//  url      = env("DATABASE_URL")
+//}
 
 generator client {
   provider = "prisma-client-js"
 }
 
 // --------------------------------------
-// AUTHENTICATION
-// --------------------------------------
 
 model User {
   id             Int      @id @default(autoincrement())
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
-  name           String?
+  firstName      String?
+  lastName       String?
   email          String   @unique
   hashedPassword String?
-  role           String   @default("USER")
+  role           String   @default("user")
 
   profile  Profile?
   posts    Post[]
-  tokens   Token[]
   sessions Session[]
+  tokens   Token[]
 }
 
 model Session {
@@ -35,13 +41,12 @@ model Session {
   updatedAt          DateTime  @updatedAt
   expiresAt          DateTime?
   handle             String    @unique
+  user               User?     @relation(fields: [userId], references: [id])
+  userId             Int?
   hashedSessionToken String?
   antiCSRFToken      String?
   publicData         String?
   privateData        String?
-
-  user   User? @relation(fields: [userId], references: [id])
-  userId Int?
 }
 
 model Token {
@@ -50,8 +55,6 @@ model Token {
   updatedAt   DateTime @updatedAt
   hashedToken String
   type        String
-  // See note below about TokenType enum
-  // type        TokenType
   expiresAt   DateTime
   sentTo      String
 
@@ -69,10 +72,6 @@ model Profile {
   user User @relation(fields: [userId], references: [id])
 }
 
-// --------------------------------------
-// POSTS
-// --------------------------------------
-
 model Post {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
@@ -81,20 +80,20 @@ model Post {
   published Boolean  @default(false)
 
   author     User       @relation(fields: [authorId], references: [id])
-  categories Category[] @relation(references: [id])
-  tags       Tag[]      @relation(references: [id])
+  categories Category[]
+  tags       Tag[]
 }
 
 model Category {
   id   Int    @id @default(autoincrement())
   name String
 
-  posts Post[] @relation(references: [id])
+  posts Post[]
 }
 
 model Tag {
   id   Int    @id @default(autoincrement())
   name String
 
-  posts Post[] @relation(references: [id])
+  posts Post[]
 }

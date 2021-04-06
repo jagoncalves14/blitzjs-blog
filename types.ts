@@ -1,8 +1,6 @@
-import { DefaultCtx, SessionContext } from "blitz"
-import { SimpleRolesIsAuthorized } from "@blitzjs/server"
-import { User } from "db"
+import {DefaultCtx, SessionContext, SimpleRolesIsAuthorized} from "blitz"
+import {User} from "db"
 
-// Note: You should switch to Postgres and then use a DB enum for role type
 export type Role = "ADMIN" | "USER"
 
 declare module "blitz" {
@@ -14,6 +12,7 @@ declare module "blitz" {
     PublicData: {
       userId: User["id"]
       role: Role
+      views?: number
     }
   }
 }

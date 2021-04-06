@@ -1,7 +1,7 @@
-import { ReactNode, PropsWithoutRef } from "react"
-import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
+import React, {PropsWithoutRef,ReactNode} from "react"
+import {Form as FinalForm, FormProps as FinalFormProps} from "react-final-form"
 import * as z from "zod"
-export { FORM_ERROR } from "final-form"
+export {FORM_ERROR} from "final-form"
 
 export interface FormProps<S extends z.ZodType<any, any>>
   extends Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit"> {
@@ -34,19 +34,19 @@ export function Form<S extends z.ZodType<any, any>>({
         }
       }}
       onSubmit={onSubmit}
-      render={({ handleSubmit, submitting, submitError }) => (
+      render={({handleSubmit, submitting, submitError}) => (
         <form onSubmit={handleSubmit} className="form" {...props}>
           {/* Form fields supplied as children are rendered here */}
           {children}
 
           {submitError && (
-            <div role="alert" style={{ color: "red" }}>
+            <div role="alert" style={{color: "red"}}>
               {submitError}
             </div>
           )}
 
           {submitText && (
-            <button type="submit" disabled={submitting}>
+            <button className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6" type="submit" disabled={submitting}>
               {submitText}
             </button>
           )}

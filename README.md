@@ -1,19 +1,26 @@
-![Blitz Logo](https://github.com/vercel/vercel/blob/master/packages/frameworks/logos/blitz.svg)
+# auth
 
-# Blitz.js Example
+## Getting Started
 
-This directory is a brief example of a [Blitz.js](https://blitzjs.com/) project that can be deployed with Vercel and zero configuration.
+1. Add this code to db/schema.prisma:
 
-## Deploy Your Own
-
-Deploy your own Blitz.js project with Vercel by viewing the [documentation on deploying to Vercel](https://blitzjs.com/docs/deploy-vercel)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/vercel/vercel/tree/master/examples/blitzjs)
-
-### How We Created This Example
-
-To get started with Blitz.js, you can use [npx](https://www.npmjs.com/package/npx) to initialize the project:
-
-```shell
-$ npx blitz new
 ```
+model Post {
+  id      Int      @default(autoincrement()) @id
+  name    String
+}
+```
+
+2. DB migrate
+
+```
+blitz prisma migrate dev
+```
+
+3. Start the dev server
+
+```
+blitz dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

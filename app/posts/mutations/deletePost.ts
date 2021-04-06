@@ -1,4 +1,4 @@
-import { resolver } from "blitz"
+import {resolver} from "blitz"
 import db from "db"
 import * as z from "zod"
 
@@ -8,9 +8,9 @@ const DeletePost = z
   })
   .nonstrict()
 
-export default resolver.pipe(resolver.zod(DeletePost), resolver.authorize(), async ({ id }) => {
+export default resolver.pipe(resolver.zod(DeletePost), resolver.authorize(), async ({id}) => {
   // TODO: in multi-tenant app, you must add validation to ensure correct tenant
-  const post = await db.post.deleteMany({ where: { id } })
+  const post = await db.post.deleteMany({where: {id}})
 
   return post
 })
