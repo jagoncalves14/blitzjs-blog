@@ -24,7 +24,7 @@ export const ProfilesList = () => {
           profiles.map((profile) => (
             <li key={profile.id}>
               <Link href={`/profiles/${profile.id}`}>
-                <a>{profile.user.name}</a>
+                <a>{profile.userId}</a>
               </Link>
             </li>
           ))}

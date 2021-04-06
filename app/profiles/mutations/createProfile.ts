@@ -4,7 +4,8 @@ import * as z from "zod"
 
 const CreateProfile = z
   .object({
-    name: z.string(),
+    bio: z.string(),
+    userId: z.number().int(),
   })
   .nonstrict()
 

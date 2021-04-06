@@ -18,7 +18,7 @@
     "skipLibCheck": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -26,8 +26,7 @@
     "jsx": "preserve",
     "esModuleInterop": true,
     "noEmit": true,
-    "isolatedModules": true,
-    "incremental": true
+    "isolatedModules": true
   },
   "exclude": ["node_modules", "cypress"],
   "include": ["**/*.ts", "**/*.tsx"]

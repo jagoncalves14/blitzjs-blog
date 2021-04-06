@@ -23,7 +23,7 @@ export const UsersList = () => {
         {users.map((user) => (
           <li key={user.id} className="border-b-2 border-indigo-200">
             <Link href={`/users/${user.id}`}>
-              <a>{user.name}</a>
+              <a>{user.firstName}</a>
             </Link>
           </li>
         ))}

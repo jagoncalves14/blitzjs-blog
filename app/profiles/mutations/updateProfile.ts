@@ -4,8 +4,9 @@ import * as z from "zod"
 
 const UpdateProfile = z
   .object({
-    id: z.number(),
-    name: z.string(),
+    id: z.number().int(),
+    bio: z.string(),
+    userId: z.number().int(),
   })
   .nonstrict()
 

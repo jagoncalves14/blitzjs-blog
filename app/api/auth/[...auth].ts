@@ -22,6 +22,20 @@ assert(process.env.AUTH0_DOMAIN, "You must provide the AUTH0_DOMAIN env variable
 assert(process.env.AUTH0_CLIENT_ID, "You must provide the AUTH0_CLIENT_ID env variable")
 assert(process.env.AUTH0_CLIENT_SECRET, "You must provide the AUTH0_CLIENT_SECRET env variable")
 
+const firstName = (displayName: string) => {
+  if (displayName.includes(" ")) {
+    return displayName.split(" ")[0]
+  }
+  return displayName
+}
+
+const lastName = (displayName: string) => {
+  if (displayName.includes(" ")) {
+    return displayName.split(" ")[1]
+  }
+  return displayName
+}
+
 export default passportAuth((ctx) => ({
   successRedirectUrl: "/",
   strategies: [
@@ -50,7 +64,8 @@ export default passportAuth((ctx) => ({
             where: {email},
             create: {
               email,
-              name: profile.displayName,
+              firstName: firstName(profile.displayName),
+              lastName: lastName(profile.displayName),
             },
             update: {email},
           })
@@ -87,7 +102,8 @@ export default passportAuth((ctx) => ({
             where: {email},
             create: {
               email,
-              name: profile.displayName,
+              firstName: firstName(profile.displayName),
+              lastName: lastName(profile.displayName),
             },
             update: {email},
           })
@@ -126,7 +142,8 @@ export default passportAuth((ctx) => ({
             where: {email},
             create: {
               email,
-              name: profile.displayName,
+              firstName: firstName(profile.displayName),
+              lastName: lastName(profile.displayName),
             },
             update: {email},
           })

@@ -27,6 +27,7 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
   try {
     const user = await invokeWithMiddleware(
       getUser,
+      // @ts-ignore
       {where: {id: Number(session.userId)}},
       {res, req},
     )
