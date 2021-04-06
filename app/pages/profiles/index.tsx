@@ -1,6 +1,6 @@
 import Layout from "app/core/layouts/Layout"
 import getProfiles from "app/profiles/queries/getProfiles"
-import {BlitzPage,Head, Link, usePaginatedQuery, useRouter} from "blitz"
+import {BlitzPage, Head, Link, usePaginatedQuery, useRouter} from "blitz"
 import {Suspense} from "react"
 
 const ITEMS_PER_PAGE = 100
@@ -20,21 +20,30 @@ export const ProfilesList = () => {
   return (
     <div>
       <ul>
-        {profiles && profiles.map((profile) => (
-          <li key={profile.id}>
-            <Link href={`/profiles/${profile.id}`}>
-              <a>{profile.user.name}</a>
-            </Link>
-          </li>
-        ))}
+        {profiles &&
+          profiles.map((profile) => (
+            <li key={profile.id}>
+              <Link href={`/profiles/${profile.id}`}>
+                <a>{profile.user.name}</a>
+              </Link>
+            </li>
+          ))}
       </ul>
 
       {profiles.length > 0 && (
         <div className="mt-12">
-          <button className="text-md leading-none font-semibold rounded bg-indigo-200 text-indigo-600 transition-all py-2 px-6" disabled={page === 0} onClick={goToPreviousPage}>
+          <button
+            className="text-md leading-none font-semibold rounded bg-indigo-200 text-indigo-600 transition-all py-2 px-6"
+            disabled={page === 0}
+            onClick={goToPreviousPage}
+          >
             Previous
           </button>
-          <button className="text-md leading-none font-semibold rounded bg-indigo-200 text-indigo-600 transition-all py-2 px-6 ml-8" disabled={!hasMore} onClick={goToNextPage}>
+          <button
+            className="text-md leading-none font-semibold rounded bg-indigo-200 text-indigo-600 transition-all py-2 px-6 ml-8"
+            disabled={!hasMore}
+            onClick={goToNextPage}
+          >
             Next
           </button>
         </div>

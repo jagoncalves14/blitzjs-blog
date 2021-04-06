@@ -1,8 +1,8 @@
 import Layout from "app/core/layouts/Layout"
-import {FORM_ERROR,TagForm} from "app/tags/components/TagForm"
+import {FORM_ERROR, TagForm} from "app/tags/components/TagForm"
 import updateTag from "app/tags/mutations/updateTag"
 import getTag from "app/tags/queries/getTag"
-import {BlitzPage,Head, Link, useMutation, useParam, useQuery, useRouter} from "blitz"
+import {BlitzPage, Head, Link, useMutation, useParam, useQuery, useRouter} from "blitz"
 import {Suspense} from "react"
 
 export const EditTag = () => {

@@ -1,7 +1,7 @@
 import Layout from "app/core/layouts/Layout"
-import {FORM_ERROR,ProfileForm} from "app/profiles/components/ProfileForm"
+import {FORM_ERROR, ProfileForm} from "app/profiles/components/ProfileForm"
 import createProfile from "app/profiles/mutations/createProfile"
-import {BlitzPage,Link, useMutation, useRouter} from "blitz"
+import {BlitzPage, useMutation, useRouter} from "blitz"
 
 const NewProfilePage: BlitzPage = () => {
   const router = useRouter()

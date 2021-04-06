@@ -1,7 +1,7 @@
 import Layout from "app/core/layouts/Layout"
-import {FORM_ERROR,UserForm} from "app/users/components/UserForm"
+import {FORM_ERROR, UserForm} from "app/users/components/UserForm"
 import createUser from "app/users/mutations/createUser"
-import {BlitzPage,Link, useMutation, useRouter} from "blitz"
+import {BlitzPage, Link, useMutation, useRouter} from "blitz"
 
 const NewUserPage: BlitzPage = () => {
   const router = useRouter()

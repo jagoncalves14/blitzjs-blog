@@ -1,4 +1,4 @@
-import {AuthenticationError,resolver, SecurePassword} from "blitz"
+import {AuthenticationError, resolver, SecurePassword} from "blitz"
 import db from "db"
 import {Role} from "types"
 

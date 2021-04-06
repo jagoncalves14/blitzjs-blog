@@ -1,8 +1,8 @@
 import Layout from "app/core/layouts/Layout"
-import {FORM_ERROR,UserForm} from "app/users/components/UserForm"
+import {FORM_ERROR, UserForm} from "app/users/components/UserForm"
 import updateUser from "app/users/mutations/updateUser"
 import getUser from "app/users/queries/getUser"
-import {BlitzPage,Head, Link, useMutation, useParam, useQuery, useRouter} from "blitz"
+import {BlitzPage, Head, Link, useMutation, useParam, useQuery, useRouter} from "blitz"
 import {Suspense} from "react"
 
 export const EditUser = () => {

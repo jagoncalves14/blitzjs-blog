@@ -10,7 +10,5 @@ const CreateTag = z
 
 export default resolver.pipe(resolver.zod(CreateTag), resolver.authorize(), async (input) => {
   // TODO: in multi-tenant app, you must add validation to ensure correct tenant
-  const tag = await db.tag.create({data: input})
-
-  return tag
+  return await db.tag.create({data: input})
 })

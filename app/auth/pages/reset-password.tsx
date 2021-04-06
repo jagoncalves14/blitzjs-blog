@@ -3,7 +3,7 @@ import {ResetPassword} from "app/auth/validations"
 import {Form, FORM_ERROR} from "app/core/components/Form"
 import {LabeledTextField} from "app/core/components/LabeledTextField"
 import Layout from "app/core/layouts/Layout"
-import {BlitzPage, Link, useMutation,useRouterQuery} from "blitz"
+import {BlitzPage, Link, useMutation, useRouterQuery} from "blitz"
 
 const ResetPasswordPage: BlitzPage = () => {
   const query = useRouterQuery()
@@ -29,15 +29,13 @@ const ResetPasswordPage: BlitzPage = () => {
             try {
               await resetPasswordMutation(values)
             } catch (error) {
-              if (error.name === "ResetPasswordError") {
-                return {
-                  [FORM_ERROR]: error.message,
-                }
-              } else {
-                return {
-                  [FORM_ERROR]: "Sorry, we had an unexpected error. Please try again.",
-                }
-              }
+              return error.name === "ResetPasswordError"
+                ? {
+                    [FORM_ERROR]: error.message,
+                  }
+                : {
+                    [FORM_ERROR]: "Sorry, we had an unexpected error. Please try again.",
+                  }
             }
           }}
         >
@@ -53,6 +51,8 @@ const ResetPasswordPage: BlitzPage = () => {
   )
 }
 
-ResetPasswordPage.getLayout = (page) => <Layout title="Blitzerplate - Reset Your Password">{page}</Layout>
+ResetPasswordPage.getLayout = (page) => (
+  <Layout title="Blitzerplate - Reset Your Password">{page}</Layout>
+)
 
 export default ResetPasswordPage

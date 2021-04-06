@@ -1,7 +1,7 @@
 import Layout from "app/core/layouts/Layout"
-import {FORM_ERROR,TagForm} from "app/tags/components/TagForm"
+import {FORM_ERROR, TagForm} from "app/tags/components/TagForm"
 import createTag from "app/tags/mutations/createTag"
-import {BlitzPage,Link, useMutation, useRouter} from "blitz"
+import {BlitzPage, useMutation, useRouter} from "blitz"
 
 const NewTagPage: BlitzPage = () => {
   const router = useRouter()

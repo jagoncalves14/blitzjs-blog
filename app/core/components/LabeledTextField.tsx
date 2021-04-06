@@ -26,7 +26,13 @@ export const LabeledTextField = React.forwardRef<HTMLInputElement, LabeledTextFi
       <div {...outerProps}>
         <label className="flex flex-col align-start text-gray-700 font-bold py-2">
           {label}
-          <input className="w-full text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline mt-1 py-2 px-3" {...input} disabled={submitting} {...props} ref={ref} />
+          <input
+            className="w-full text-gray-700 shadow border rounded border-gray-300 focus:outline-none focus:shadow-outline mt-1 py-2 px-3"
+            {...input}
+            disabled={submitting}
+            {...props}
+            ref={ref}
+          />
         </label>
 
         {touched && normalizedError && (

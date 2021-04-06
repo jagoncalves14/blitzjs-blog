@@ -1,7 +1,7 @@
 import Layout from "app/core/layouts/Layout"
 import deleteTag from "app/tags/mutations/deleteTag"
 import getTag from "app/tags/queries/getTag"
-import {BlitzPage, Head, Link, useMutation,useParam, useQuery, useRouter} from "blitz"
+import {BlitzPage, Head, Link, useMutation, useParam, useQuery, useRouter} from "blitz"
 import {Suspense} from "react"
 
 export const Tag = () => {
@@ -21,7 +21,9 @@ export const Tag = () => {
         <pre>{JSON.stringify(tag, null, 2)}</pre>
 
         <Link href={`/tags/${tag.id}/edit`}>
-          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">Edit</a>
+          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">
+            Edit
+          </a>
         </Link>
 
         <button
@@ -46,7 +48,9 @@ const ShowTagPage: BlitzPage = () => {
     <div className="flex-grow container mx-auto sm:px-6">
       <div className="w-full text-right">
         <Link href="/tags">
-          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">Tags</a>
+          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">
+            Tags
+          </a>
         </Link>
       </div>
 

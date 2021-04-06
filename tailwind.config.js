@@ -20,7 +20,7 @@ module.exports = {
       xxs: "0.75rem", // 12px
       xs: ["0.8125rem", "1.1375rem"], // 13px
       sm: ["0.9rem"], // 14px
-      base: ["0.9375rem"], //"1.375rem"], // 15px
+      base: ["0.9375rem"], // "1.375rem"], // 15px
       lg: ["1.0625rem", "1.5625rem"], // 17px
       xl: ["1.25rem", "2rem"], // 20px
       "2xl": ["1.5rem", "1.875rem"], // 24px
@@ -38,7 +38,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [
-    require('@tailwindcss/custom-forms'),
-  ]
+  plugins: [require("@tailwindcss/custom-forms")],
 }

@@ -19,7 +19,7 @@ module.exports = withMonorepoBuildTooling(
       isomorphicResolverImports: false,
     },
     images: {
-      domains: ['blush.design'],
+      domains: ["blush.design"],
     },
     /*
   webpack: (config, {buildId, dev, isServer, defaultLoaders, webpack}) => {

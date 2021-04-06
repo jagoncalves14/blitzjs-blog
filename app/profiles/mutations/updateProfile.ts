@@ -14,8 +14,6 @@ export default resolver.pipe(
   resolver.authorize(),
   async ({id, ...data}) => {
     // TODO: in multi-tenant app, you must add validation to ensure correct tenant
-    const profile = await db.profile.update({where: {id}, data})
-
-    return profile
+    return await db.profile.update({where: {id}, data})
   },
 )

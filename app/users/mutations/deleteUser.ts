@@ -10,7 +10,5 @@ const DeleteUser = z
 
 export default resolver.pipe(resolver.zod(DeleteUser), resolver.authorize(), async ({id}) => {
   // TODO: in multi-tenant app, you must add validation to ensure correct tenant
-  const user = await db.user.deleteMany({where: {id}})
-
-  return user
+  return await db.user.deleteMany({where: {id}})
 })

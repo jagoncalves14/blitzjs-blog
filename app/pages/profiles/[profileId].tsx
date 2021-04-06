@@ -1,7 +1,7 @@
 import Layout from "app/core/layouts/Layout"
 import deleteProfile from "app/profiles/mutations/deleteProfile"
 import getProfile from "app/profiles/queries/getProfile"
-import {BlitzPage, Head, Link, useMutation,useParam, useQuery, useRouter} from "blitz"
+import {BlitzPage, Head, Link, useMutation, useParam, useQuery, useRouter} from "blitz"
 import {Suspense} from "react"
 
 export const Profile = () => {
@@ -21,7 +21,9 @@ export const Profile = () => {
         <pre>{JSON.stringify(profile, null, 2)}</pre>
 
         <Link href={`/profiles/${profile.id}/edit`}>
-          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">Edit</a>
+          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">
+            Edit
+          </a>
         </Link>
 
         <button
@@ -46,7 +48,9 @@ const ShowProfilePage: BlitzPage = () => {
     <div className="flex-grow container mx-auto sm:px-6">
       <div className="w-full text-right">
         <Link href="/profiles">
-          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">Profiles</a>
+          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">
+            Profiles
+          </a>
         </Link>
       </div>
 

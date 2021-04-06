@@ -1,11 +1,9 @@
-import createCategory from "app/categories/mutations/createCategory"
 import Layout from "app/core/layouts/Layout"
-import {FORM_ERROR,PostForm} from "app/posts/components/PostForm"
+import {FORM_ERROR, PostForm} from "app/posts/components/PostForm"
 import updatePost from "app/posts/mutations/updatePost"
 import getPost from "app/posts/queries/getPost"
-import createTag from "app/tags/mutations/createTag"
-import {BlitzPage,Head, Link, useMutation, useParam, useQuery, useRouter} from "blitz"
-import { Category, Post } from "db"
+import {BlitzPage, Head, Link, useMutation, useParam, useQuery, useRouter} from "blitz"
+import {Category, Post} from "db"
 import {Suspense} from "react"
 
 export const EditPost = () => {
@@ -17,13 +15,17 @@ export const EditPost = () => {
   return (
     <>
       <Head>
-        <title>Blitzerplate - Edit "{post.title}"</title>
+        <title>Blitzerplate - Edit {post.title}</title>
       </Head>
 
       <div className="flex-grow container mx-auto">
         <div className="block space-x-4">
-          <label className="rounded py-1 px-2 bg-indigo-200 text-indigo-600 uppercase text-xs font-bold">Post ID - {post.id}</label>
-          <label className="rounded py-1 px-2 bg-green-200 text-green-600 uppercase text-xs font-bold">EDITING</label>
+          <span className="rounded py-1 px-2 bg-indigo-200 text-indigo-600 uppercase text-xs font-bold">
+            Post ID - {post.id}
+          </span>
+          <span className="rounded py-1 px-2 bg-green-200 text-green-600 uppercase text-xs font-bold">
+            EDITING
+          </span>
         </div>
         <h1 className="text-4xl font-bold mt-4 mb-8">{post.title}</h1>
 
@@ -38,14 +40,14 @@ export const EditPost = () => {
             // schema={UpdatePost}
             initialValues={post}
             onSubmit={async (values) => {
-              let payload = {
+              const payload = {
                 id: post.id,
                 ...values,
               }
 
               try {
                 const updated = await updatePostMutation(payload)
-                await setQueryData(updated as Post & { categories: Category[]; })
+                await setQueryData(updated as Post & {categories: Category[]})
                 router.push(`/posts/${updated.id}`)
               } catch (error) {
                 console.error(error)
@@ -55,7 +57,7 @@ export const EditPost = () => {
               }
             }}
           />
-          </div>
+        </div>
       </div>
     </>
   )
@@ -66,7 +68,9 @@ const EditPostPage: BlitzPage = () => {
     <div className="flex-grow container mx-auto sm:px-6 pb-24">
       <div className="w-full text-right">
         <Link href="/posts">
-          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">Back to posts</a>
+          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">
+            Back to posts
+          </a>
         </Link>
       </div>
 

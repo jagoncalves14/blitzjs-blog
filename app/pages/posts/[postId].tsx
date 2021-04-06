@@ -15,12 +15,14 @@ export const Post = () => {
   return (
     <>
       <Head>
-      <title>Blitzerplate - {post.title}</title>
+        <title>Blitzerplate - {post.title}</title>
       </Head>
 
       <div>
         <div className="block space-x-4">
-          <label className="rounded py-1 px-2 bg-indigo-200 text-indigo-600 uppercase text-xs font-bold">Post ID - {post.id}</label>
+          <label className="rounded py-1 px-2 bg-indigo-200 text-indigo-600 uppercase text-xs font-bold">
+            Post ID - {post.id}
+          </label>
         </div>
         <h1 className="text-4xl font-bold mt-4 mb-8">{post.title}</h1>
 
@@ -29,7 +31,9 @@ export const Post = () => {
         {isAuthenticated && (
           <div className="mt-8">
             <Link href={`/posts/${post.id}/edit`}>
-              <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">Edit</a>
+              <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">
+                Edit
+              </a>
             </Link>
 
             <button
@@ -56,7 +60,9 @@ const ShowPostPage: BlitzPage = () => {
     <div className="flex-grow container mx-auto sm:px-6 pb-24">
       <div className="w-full text-right">
         <Link href="/posts">
-          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">Posts</a>
+          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">
+            Posts
+          </a>
         </Link>
       </div>
 

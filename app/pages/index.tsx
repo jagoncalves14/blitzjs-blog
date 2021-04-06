@@ -1,10 +1,5 @@
 import Layout from "app/core/layouts/Layout"
-import {
-  BlitzPage,
-  Head,
-  Image,
-  Link,
-} from "blitz"
+import {BlitzPage, Head, Image, Link} from "blitz"
 
 const Home: BlitzPage = () => (
   <>
@@ -32,7 +27,13 @@ const Home: BlitzPage = () => (
           </div>
         </div>
         <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
-          <Image width="800" height="450" src="https://blush.design/api/download?shareUri=SNdyZe28c&w=800&fm=png" alt="Blush Image" className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" />
+          <Image
+            width="800"
+            height="450"
+            src="https://blush.design/api/download?shareUri=SNdyZe28c&w=800&fm=png"
+            alt="Blush Image"
+            className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
+          />
         </div>
       </div>
     </main>

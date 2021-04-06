@@ -1,4 +1,4 @@
-import React, {PropsWithoutRef,ReactNode} from "react"
+import React, {PropsWithoutRef, ReactNode} from "react"
 import {Form as FinalForm, FormProps as FinalFormProps} from "react-final-form"
 import * as z from "zod"
 export {FORM_ERROR} from "final-form"
@@ -46,7 +46,11 @@ export function Form<S extends z.ZodType<any, any>>({
           )}
 
           {submitText && (
-            <button className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6" type="submit" disabled={submitting}>
+            <button
+              className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6"
+              type="submit"
+              disabled={submitting}
+            >
               {submitText}
             </button>
           )}

@@ -1,8 +1,8 @@
 import Layout from "app/core/layouts/Layout"
-import {FORM_ERROR,ProfileForm} from "app/profiles/components/ProfileForm"
+import {FORM_ERROR, ProfileForm} from "app/profiles/components/ProfileForm"
 import updateProfile from "app/profiles/mutations/updateProfile"
 import getProfile from "app/profiles/queries/getProfile"
-import {BlitzPage,Head, Link, useMutation, useParam, useQuery, useRouter} from "blitz"
+import {BlitzPage, Head, Link, useMutation, useParam, useQuery, useRouter} from "blitz"
 import {Suspense} from "react"
 
 export const EditProfile = () => {

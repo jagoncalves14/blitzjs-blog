@@ -1,4 +1,4 @@
-import {generateToken, hash256,resolver} from "blitz"
+import {generateToken, hash256, resolver} from "blitz"
 import db from "db"
 import {forgotPasswordMailer} from "mailers/forgotPasswordMailer"
 
@@ -38,5 +38,4 @@ export default resolver.pipe(resolver.zod(ForgotPassword), async ({email}) => {
   }
 
   // 8. Return the same result whether a password reset email was sent or not
-  return
 })

@@ -10,7 +10,5 @@ const CreateCategory = z
 
 export default resolver.pipe(resolver.zod(CreateCategory), resolver.authorize(), async (input) => {
   // TODO: in multi-tenant app, you must add validation to ensure correct tenant
-  const category = await db.category.create({data: input})
-
-  return category
+  return await db.category.create({data: input})
 })

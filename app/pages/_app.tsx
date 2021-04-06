@@ -1,7 +1,7 @@
-import "app/core/styles/index.css";
+import "app/core/styles/index.css"
 
 import LoginForm from "app/auth/components/LoginForm"
-import Layout from "app/core/layouts/Layout";
+import Layout from "app/core/layouts/Layout"
 import {
   AppProps,
   AuthenticationError,
@@ -42,12 +42,7 @@ function RootErrorFallback({error, resetErrorBoundary}: ErrorFallbackProps) {
       </Layout>
     )
   } else if (error instanceof AuthorizationError) {
-    return (
-      <ErrorComponent
-        statusCode={error.statusCode}
-        title="Blitzerplate - Unauthorized"
-      />
-    )
+    return <ErrorComponent statusCode={error.statusCode} title="Blitzerplate - Unauthorized" />
   } else {
     return (
       <ErrorComponent statusCode={error.statusCode || 400} title={error.message || error.name} />

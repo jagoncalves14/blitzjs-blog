@@ -1,4 +1,4 @@
-import {hash256,resolver, SecurePassword} from "blitz"
+import {hash256, resolver, SecurePassword} from "blitz"
 import db from "db"
 
 import {ResetPassword} from "../validations"

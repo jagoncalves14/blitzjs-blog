@@ -1,5 +1,5 @@
 import Layout from "app/core/layouts/Layout"
-import {FORM_ERROR,PostForm} from "app/posts/components/PostForm"
+import {FORM_ERROR, PostForm} from "app/posts/components/PostForm"
 import createPost from "app/posts/mutations/createPost"
 import {BlitzPage, useMutation, useRouter, useSession} from "blitz"
 

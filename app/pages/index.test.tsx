@@ -1,6 +1,6 @@
 import {render} from "test/utils"
 
-import Home from "./index"
+import Home from "."
 
 jest.mock("@blitzjs/core", () => ({
   ...jest.requireActual<object>("@blitzjs/core")!,

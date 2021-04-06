@@ -1,7 +1,7 @@
 import Layout from "app/core/layouts/Layout"
 import deleteUser from "app/users/mutations/deleteUser"
 import getUser from "app/users/queries/getUser"
-import {BlitzPage, Head, Link, useMutation,useParam, useQuery, useRouter} from "blitz"
+import {BlitzPage, Head, Link, useMutation, useParam, useQuery, useRouter} from "blitz"
 import {Suspense} from "react"
 
 export const User = () => {
@@ -21,7 +21,9 @@ export const User = () => {
         <pre>{JSON.stringify(user, null, 2)}</pre>
 
         <Link href={`/users/${user.id}/edit`}>
-          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">Edit</a>
+          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">
+            Edit
+          </a>
         </Link>
 
         <button
@@ -46,7 +48,9 @@ const ShowUserPage: BlitzPage = () => {
     <div className="flex-grow container mx-auto sm:px-6">
       <div className="w-full text-right">
         <Link href="/users">
-          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">Users</a>
+          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">
+            Users
+          </a>
         </Link>
       </div>
 

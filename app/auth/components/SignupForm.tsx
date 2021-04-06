@@ -29,23 +29,25 @@ export const SignupForm = (props: SignupFormProps) => {
               await signupMutation(values)
               props.onSuccess?.()
             } catch (error) {
-              if (error.code === "P2002" && error.meta?.target?.includes("email")) {
-                // This error comes from Prisma
-                return {email: "This email is already being used"}
-              } else {
-                return {[FORM_ERROR]: error.toString()}
-              }
+              return error.code === "P2002" && error.meta?.target?.includes("email")
+                ? {email: "This email is already being used"}
+                : {[FORM_ERROR]: error.toString()}
             }
           }}
         >
           <div className="grid gap-4 grid-cols-2">
-          <LabeledTextField name="firstName" label="First Name" placeholder="John" />
-          <LabeledTextField name="lastName" label="Last Name" placeholder="Doe" />
+            <LabeledTextField name="firstName" label="First Name" placeholder="John" />
+            <LabeledTextField name="lastName" label="Last Name" placeholder="Doe" />
           </div>
           <LabeledTextField name="email" label="Email" placeholder="johndoe@email.com" />
-          <LabeledTextField name="password" type="password" label="Password" placeholder="10 characters long" />
+          <LabeledTextField
+            name="password"
+            type="password"
+            label="Password"
+            placeholder="10 characters long"
+          />
         </Form>
-    </div>
+      </div>
     </div>
   )
 }

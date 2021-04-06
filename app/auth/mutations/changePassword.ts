@@ -1,4 +1,4 @@
-import {NotFoundError, resolver,SecurePassword} from "blitz"
+import {NotFoundError, resolver, SecurePassword} from "blitz"
 import db from "db"
 
 import {ChangePassword} from "../validations"

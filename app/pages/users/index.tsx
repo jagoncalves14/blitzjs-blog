@@ -1,6 +1,6 @@
 import Layout from "app/core/layouts/Layout"
 import getUsers from "app/users/queries/getUsers"
-import {BlitzPage,Head, Link, usePaginatedQuery, useRouter} from "blitz"
+import {BlitzPage, Head, Link, usePaginatedQuery, useRouter} from "blitz"
 import {Suspense} from "react"
 
 const ITEMS_PER_PAGE = 100
@@ -31,10 +31,18 @@ export const UsersList = () => {
 
       {users.length > 0 && (
         <div className="mt-12">
-          <button className="text-md leading-none font-semibold rounded bg-indigo-200 text-indigo-600 transition-all py-2 px-6" disabled={page === 0} onClick={goToPreviousPage}>
+          <button
+            className="text-md leading-none font-semibold rounded bg-indigo-200 text-indigo-600 transition-all py-2 px-6"
+            disabled={page === 0}
+            onClick={goToPreviousPage}
+          >
             Previous
           </button>
-          <button className="text-md leading-none font-semibold rounded bg-indigo-200 text-indigo-600 transition-all py-2 px-6 ml-8" disabled={!hasMore} onClick={goToNextPage}>
+          <button
+            className="text-md leading-none font-semibold rounded bg-indigo-200 text-indigo-600 transition-all py-2 px-6 ml-8"
+            disabled={!hasMore}
+            onClick={goToNextPage}
+          >
             Next
           </button>
         </div>

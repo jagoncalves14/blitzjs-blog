@@ -1,4 +1,4 @@
-import db from "./index"
+import db from "."
 const seed = async () => {
   const user = await db.user.create({data: {name: "admin", email: "hey@" + new Date().getTime()}})
   console.log("Created user", user)

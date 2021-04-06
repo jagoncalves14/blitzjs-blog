@@ -1,7 +1,7 @@
 import Layout from "app/core/layouts/Layout"
 import deletePost from "app/posts/mutations/deletePost"
 import getPosts from "app/posts/queries/getPosts"
-import {BlitzPage, Head, Link, useMutation,usePaginatedQuery, useRouter, useSession} from "blitz"
+import {BlitzPage, Link, useMutation, usePaginatedQuery, useRouter, useSession} from "blitz"
 import {Suspense} from "react"
 
 const ITEMS_PER_PAGE = 20
@@ -28,36 +28,41 @@ export const PostsList = () => {
   return (
     <div>
       {hasPosts ? (
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id} className="flex flex-row justify-between border-b-2 font-bold text-xl border-indigo-200 py-4">
-            <Link href={`/posts/${post.id}`}>
-              <a className="mt-1">{post.title}</a>
-            </Link>
+        <ul>
+          {posts.map((post) => (
+            <li
+              key={post.id}
+              className="flex flex-row justify-between border-b-2 font-bold text-xl border-indigo-200 py-4"
+            >
+              <Link href={`/posts/${post.id}`}>
+                <a className="mt-1">{post.title}</a>
+              </Link>
 
-            {isAuthenticated && (
-              <div>
-                <Link href={`/posts/${post.id}/edit`}>
-                  <a className="inline-block text-xs leading-none font-semibold rounded border border-indigo-600 text-indigo-600 transition-all py-2 px-6">Edit</a>
-                </Link>
+              {isAuthenticated && (
+                <div>
+                  <Link href={`/posts/${post.id}/edit`}>
+                    <a className="inline-block text-xs leading-none font-semibold rounded border border-indigo-600 text-indigo-600 transition-all py-2 px-6">
+                      Edit
+                    </a>
+                  </Link>
 
-                <button
-                  className="text-xs leading-none font-semibold rounded border border-red-600 text-red-600 transition-all py-2 px-6 ml-4"
-                  type="button"
-                  onClick={async () => {
-                    if (window.confirm("This will be deleted")) {
-                      await deletePostMutation({id: post.id})
-                      router.push("/posts")
-                    }
-                  }}
-                >
-                  Delete
-                </button>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
+                  <button
+                    className="text-xs leading-none font-semibold rounded border border-red-600 text-red-600 transition-all py-2 px-6 ml-4"
+                    type="button"
+                    onClick={async () => {
+                      if (window.confirm("This will be deleted")) {
+                        await deletePostMutation({id: post.id})
+                        router.push("/posts")
+                      }
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
       ) : (
         <p className="text-gray-600">You currently have no posts.</p>
       )}
@@ -65,12 +70,20 @@ export const PostsList = () => {
       {hasPosts && (
         <div className="mt-24 space-x-8">
           {hasLess && (
-            <button className="text-md leading-none font-semibold rounded bg-indigo-200 text-indigo-600 transition-all py-2 px-6" disabled={page === 0} onClick={goToPreviousPage}>
+            <button
+              className="text-md leading-none font-semibold rounded bg-indigo-200 text-indigo-600 transition-all py-2 px-6"
+              disabled={page === 0}
+              onClick={goToPreviousPage}
+            >
               Previous
             </button>
           )}
           {hasMore && (
-            <button className="text-md leading-none font-semibold rounded bg-indigo-200 text-indigo-600 transition-all py-2 px-6" disabled={!hasMore} onClick={goToNextPage}>
+            <button
+              className="text-md leading-none font-semibold rounded bg-indigo-200 text-indigo-600 transition-all py-2 px-6"
+              disabled={!hasMore}
+              onClick={goToNextPage}
+            >
               Next
             </button>
           )}
@@ -88,7 +101,9 @@ export const CreatePostButton = () => {
 
   return (
     <Link href="/posts/new">
-      <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">Create Post</a>
+      <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">
+        Create Post
+      </a>
     </Link>
   )
 }

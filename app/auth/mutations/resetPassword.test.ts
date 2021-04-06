@@ -13,6 +13,8 @@ const mockCtx: any = {
   },
 }
 
+const emailTest = "user@example.com"
+
 describe("resetPassword mutation", () => {
   it("works correctly", async () => {
     expect(true).toBe(true)
@@ -27,7 +29,7 @@ describe("resetPassword mutation", () => {
 
     const user = await db.user.create({
       data: {
-        email: "user@example.com",
+        email: emailTest,
         tokens: {
           // Create old token to ensure it's deleted
           create: [
@@ -35,13 +37,13 @@ describe("resetPassword mutation", () => {
               type: "RESET_PASSWORD",
               hashedToken: hash256(expiredToken),
               expiresAt: past,
-              sentTo: "user@example.com",
+              sentTo: emailTest,
             },
             {
               type: "RESET_PASSWORD",
               hashedToken: hash256(goodToken),
               expiresAt: future,
-              sentTo: "user@example.com",
+              sentTo: emailTest,
             },
           ],
         },
