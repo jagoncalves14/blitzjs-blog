@@ -4,7 +4,9 @@ import * as z from "zod"
 
 const CreateUser = z
   .object({
-    name: z.string(),
+    firstName: z.string(),
+    lastName: z.string(),
+    email: z.string(),
   })
   .nonstrict()
 

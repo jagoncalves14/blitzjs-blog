@@ -5,7 +5,9 @@ import * as z from "zod"
 const UpdateUser = z
   .object({
     id: z.number(),
-    name: z.string(),
+    firstName: z.string(),
+    lastName: z.string(),
+    email: z.string(),
   })
   .nonstrict()
 
