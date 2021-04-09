@@ -69,9 +69,11 @@ export function PostForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
           } = require("suneditor/src/plugins")
 
           return (
-            <div>
+            <>
               <SunEditor
                 {...input}
+                onFocus={undefined}
+                onBlur={undefined}
                 defaultValue={props.initialValues?.content}
                 setOptions={{
                   showPathLabel: false,
@@ -106,7 +108,7 @@ export function PostForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
                 }}
               />
               {meta.touched && meta.error && <span>{meta.error}</span>}
-            </div>
+            </>
           )
         }}
       />
