@@ -1,47 +1,35 @@
 import {resolver} from "blitz"
-import db from "db"
-import * as z from "zod"
+import db, {Category} from "db"
 
-const CreatePost = z
-  .object({
-    title: z.string(),
-    content: z.string(),
-    published: z.boolean(),
-    categories: z.array(
-      z.object({
-        name: z.string(),
-        id: z.number().int(),
-      }),
-    ),
-  })
-  .nonstrict()
+export interface ICreatePostPayload {
+  authorId: number
+  data: {
+    title: string
+    content: string
+    published: boolean
+    categories: Category[]
+  }
+}
 
 export default resolver.pipe(
-  resolver.zod(CreatePost),
   resolver.authorize(),
-  async ({id, ...data}) => {
-    const payload = {...data}
+  async ({authorId, data: {...data}}: ICreatePostPayload) => {
+    const payload = {
+      ...data,
+      author: {connect: {id: authorId}},
+      categories: {
+        connectOrCreate: data.categories.map((cat: Category) => ({
+          where: {id: cat.id},
+          create: {
+            name: cat.name,
+          },
+        })),
+      },
+    }
 
     // @ts-ignore
-    delete payload.categories
-    const createResponse = await db.post.create({
+    return await db.post.create({
       data: payload,
     })
-
-    if (data.categories.length > 0) {
-      const categoriesPayload = {
-        categories: {
-          connectOrCreate: data.categories.map((cat) => ({
-            where: {id: cat.id},
-            create: {
-              name: cat.name,
-            },
-          })),
-        },
-      }
-
-      return await db.post.update({where: {id: createResponse.id}, data: categoriesPayload})
-    }
-    return createResponse
   },
 )
