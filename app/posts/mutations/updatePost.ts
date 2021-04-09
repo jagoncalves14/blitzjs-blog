@@ -1,34 +1,33 @@
 import {resolver} from "blitz"
-import db from "db"
-import * as z from "zod"
+import db, {Category} from "db"
 
-const UpdatePost = z
-  .object({
-    id: z.number().int(),
-    title: z.string(),
-    content: z.string(),
-    published: z.boolean(),
-    categories: z.array(
-      z.object({
-        name: z.string(),
-        id: z.number().int(),
-      }),
-    ),
-  })
-  .nonstrict()
+export interface IUpdatePostPayload {
+  postId: number
+  authorId: number
+  data: {
+    title: string
+    content: string
+    published: boolean
+    categories: Category[]
+  }
+}
 
 export default resolver.pipe(
-  resolver.zod(UpdatePost),
   resolver.authorize(),
-  async ({id, ...data}) => {
-    delete data.authorId
-
+  async ({postId, authorId, data: {...data}}: IUpdatePostPayload) => {
     const payload = {
       ...data,
+      author: {
+        connect: {
+          id: authorId,
+        },
+      },
       categories: {
         set: [],
         connectOrCreate: data.categories.map((cat) => ({
-          where: {id: cat.id},
+          where: {
+            id: cat.id,
+          },
           create: {
             name: cat.name,
           },
@@ -36,6 +35,14 @@ export default resolver.pipe(
       },
     }
 
-    return await db.post.update({where: {id}, data: payload})
+    return await db.post.update({
+      where: {
+        id: postId,
+      },
+      data: payload,
+      include: {
+        categories: true,
+      },
+    })
   },
 )

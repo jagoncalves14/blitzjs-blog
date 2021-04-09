@@ -3,7 +3,6 @@ import {FORM_ERROR, PostForm} from "app/posts/components/PostForm"
 import updatePost from "app/posts/mutations/updatePost"
 import getPost from "app/posts/queries/getPost"
 import {BlitzPage, Head, Link, useMutation, useParam, useQuery, useRouter, useSession} from "blitz"
-import {Category, Post} from "db"
 import {Suspense} from "react"
 
 const PostFormHandler = () => {
@@ -17,22 +16,23 @@ const PostFormHandler = () => {
   return (
     <PostForm
       submitText="Update Post"
-      // TODO use a zod schema for form validation
-      //  - Tip: extract mutation's schema into a shared `validations.ts` file and
-      //         then import and use it here
-      // schema={UpdatePost}
       initialValues={post}
       onSubmit={async (values) => {
         try {
           const payload = {
-            ...values,
-            id: post.id,
-            authorId: userId,
+            postId: post.id,
+            authorId: userId as number,
+            data: {
+              title: values.title,
+              content: values.content,
+              published: values.published || false,
+              categories: values.categories,
+            },
           }
 
-          const updated = await updatePostMutation(payload)
-          await setQueryData(updated as Post & {categories: Category[]})
-          router.push(`/posts/${updated.id}`)
+          const postUpdateResponse = await updatePostMutation(payload)
+          await setQueryData(postUpdateResponse)
+          router.push(`/posts/${postUpdateResponse.id}`)
         } catch (error) {
           console.error(error)
           return {

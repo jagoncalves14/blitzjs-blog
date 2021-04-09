@@ -19,7 +19,9 @@ export default resolver.pipe(
       author: {connect: {id: authorId}},
       categories: {
         connectOrCreate: data.categories.map((cat: Category) => ({
-          where: {id: cat.id},
+          where: {
+            id: cat.id,
+          },
           create: {
             name: cat.name,
           },
@@ -27,9 +29,11 @@ export default resolver.pipe(
       },
     }
 
-    // @ts-ignore
     return await db.post.create({
       data: payload,
+      include: {
+        categories: true,
+      },
     })
   },
 )

@@ -50,7 +50,6 @@
     "@prisma/client": "^2.20.1",
     "blitz": "0.33.1",
     "final-form": "4.20.1",
-    "jodit-react": "1.0.74",
     "passport-auth0": "1.4.0",
     "passport-github2": "0.1.12",
     "passport-twitter": "1.0.4",
