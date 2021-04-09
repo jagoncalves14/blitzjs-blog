@@ -27,6 +27,7 @@ const PostFormHandler = () => {
               content: values.content,
               published: values.published || false,
               categories: values.categories,
+              tags: values.tags,
             },
           }
 
@@ -65,7 +66,7 @@ export const EditPost = () => {
 
       <h1 className="text-4xl font-bold mt-4 mb-8">{post.title}</h1>
 
-      <pre className="rounded bg-indigo-200 p-8">{JSON.stringify(post, null, 2)}</pre>
+      {/* <pre className="rounded bg-indigo-200 p-8">{JSON.stringify(post, null, 2)}</pre> */}
 
       <div className="mt-8">
         <PostFormHandler />

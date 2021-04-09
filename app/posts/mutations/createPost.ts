@@ -1,5 +1,5 @@
 import {resolver} from "blitz"
-import db, {Category} from "db"
+import db, {Category, Tag} from "db"
 
 export interface ICreatePostPayload {
   authorId: number
@@ -8,6 +8,7 @@ export interface ICreatePostPayload {
     content: string
     published: boolean
     categories: Category[]
+    tags: Tag[]
   }
 }
 
@@ -27,12 +28,23 @@ export default resolver.pipe(
           },
         })),
       },
+      tags: {
+        connectOrCreate: data.tags.map((tag: Tag) => ({
+          where: {
+            id: tag.id,
+          },
+          create: {
+            name: tag.name,
+          },
+        })),
+      },
     }
 
     return await db.post.create({
       data: payload,
       include: {
         categories: true,
+        tags: true,
       },
     })
   },

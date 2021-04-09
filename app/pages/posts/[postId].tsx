@@ -49,7 +49,7 @@ export const Post = () => {
 
         <h1 className="text-4xl font-bold mt-4 mb-8">{post.title}</h1>
 
-        <pre className="rounded bg-indigo-200 p-8">{JSON.stringify(post, null, 2)}</pre>
+        {/* <pre className="rounded bg-indigo-200 p-8">{JSON.stringify(post, null, 2)}</pre> */}
 
         <div
           className="inline-block w-full mt-10"

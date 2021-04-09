@@ -13,6 +13,7 @@ export default resolver.pipe(resolver.zod(GetPost), async ({id}) => {
     where: {id},
     include: {
       categories: true,
+      tags: true,
     },
   })
 

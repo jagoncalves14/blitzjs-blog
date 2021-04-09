@@ -5,6 +5,7 @@ import {usePaginatedQuery} from "@blitzjs/core"
 import getCategories from "app/categories/queries/getCategories"
 import {Form, FormProps} from "app/core/components/Form"
 import {LabeledTextField} from "app/core/components/LabeledTextField"
+import getTags from "app/tags/queries/getTags"
 import {Field} from "react-final-form"
 import CreatableSelect from "react-select/creatable"
 import SunEditor from "suneditor-react"
@@ -13,41 +14,12 @@ export {FORM_ERROR} from "app/core/components/Form"
 
 export function PostForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
   const [{categories}] = usePaginatedQuery(getCategories, {orderBy: {id: "asc"}})
+  const [{tags}] = usePaginatedQuery(getTags, {orderBy: {id: "asc"}})
 
+  console.log(props.initialValues)
   return (
     <Form<S> {...props}>
       <LabeledTextField name="title" label="Title" placeholder="Add the title of the post" />
-
-      <Field
-        name="categories"
-        render={({input, meta}) => {
-          return (
-            <>
-              <label
-                className="flex flex-col align-start text-gray-700 font-bold py-2"
-                htmlFor="categories"
-              >
-                Categories
-              </label>
-              <CreatableSelect
-                className="mt-0 z-10"
-                {...input}
-                isMulti
-                isClearable
-                value={input.value}
-                options={categories}
-                getOptionLabel={(option) => option.name || option}
-                getOptionValue={(option) => option.id || option}
-                getNewOptionData={(inputValue, optionLabel) => ({
-                  id: inputValue === optionLabel ? 0 : inputValue,
-                  name: optionLabel,
-                })}
-              />
-              {meta.touched && meta.error && <span>{meta.error}</span>}
-            </>
-          )
-        }}
-      />
 
       <Field
         name="content"
@@ -67,7 +39,6 @@ export function PostForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
             template,
             textStyle,
           } = require("suneditor/src/plugins")
-
           return (
             <>
               <SunEditor
@@ -114,17 +85,79 @@ export function PostForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
       />
 
       <Field
+        name="categories"
+        render={({input, meta}) => {
+          return (
+            <>
+              <label
+                className="flex flex-col align-start text-gray-700 font-bold py-2"
+                htmlFor="categories"
+              >
+                Categories
+              </label>
+              <CreatableSelect
+                className="mt-0 z-10"
+                {...input}
+                isMulti
+                isClearable
+                value={input.value}
+                options={categories}
+                getOptionLabel={(option) => option.name || option}
+                getOptionValue={(option) => option.id || option}
+                getNewOptionData={(inputValue, optionLabel) => ({
+                  id: inputValue === optionLabel ? 0 : inputValue,
+                  name: optionLabel,
+                })}
+              />
+              {meta.touched && meta.error && <span>{meta.error}</span>}
+            </>
+          )
+        }}
+      />
+
+      <Field
+        name="tags"
+        render={({input, meta}) => {
+          return (
+            <>
+              <label
+                className="flex flex-col align-start text-gray-700 font-bold py-2"
+                htmlFor="tags"
+              >
+                Tags
+              </label>
+              <CreatableSelect
+                className="mt-0 z-10"
+                {...input}
+                isMulti
+                isClearable
+                value={input.value}
+                options={tags}
+                getOptionLabel={(option) => option.name || option}
+                getOptionValue={(option) => option.id || option}
+                getNewOptionData={(inputValue, optionLabel) => ({
+                  id: inputValue === optionLabel ? 0 : inputValue,
+                  name: optionLabel,
+                })}
+              />
+              {meta.touched && meta.error && <span>{meta.error}</span>}
+            </>
+          )
+        }}
+      />
+
+      <Field
         name="published"
         type="checkbox"
         render={({input, meta}) => (
-          <div className="block">
+          <div className="block mt-8">
             <label className="inline-flex items-center" htmlFor="published">
               <input
-                {...input}
-                type="checkbox"
-                id="published"
-                name="published"
                 className="form-checkbox border border-gray-600 outline-none focus:border-gray-600 rounded h-5 w-5 text-gray-600"
+                {...input}
+                id="published"
+                type="checkbox"
+                name="published"
                 checked={input.checked}
               />
               <span className="ml-2">Publish</span>
