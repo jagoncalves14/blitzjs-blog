@@ -24,10 +24,6 @@ export const Post = () => {
             Post ID - {post.id}
           </label>
         </div>
-        <h1 className="text-4xl font-bold mt-4 mb-8">{post.title}</h1>
-
-        <pre className="rounded bg-indigo-200 p-8">{JSON.stringify(post, null, 2)}</pre>
-
         {isAuthenticated && (
           <div className="mt-8">
             <Link href={`/posts/${post.id}/edit`}>
@@ -50,6 +46,15 @@ export const Post = () => {
             </button>
           </div>
         )}
+
+        <h1 className="text-4xl font-bold mt-4 mb-8">{post.title}</h1>
+
+        <pre className="rounded bg-indigo-200 p-8">{JSON.stringify(post, null, 2)}</pre>
+
+        <div
+          className="inline-block w-full mt-10"
+          dangerouslySetInnerHTML={{__html: post.content}}
+        />
       </div>
     </>
   )

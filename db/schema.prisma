@@ -76,8 +76,9 @@ model Post {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   authorId  Int
-  title     String
   published Boolean  @default(false)
+  title     String
+  content   String   @default("")
 
   author     User       @relation(fields: [authorId], references: [id])
   categories Category[]
@@ -86,7 +87,7 @@ model Post {
 
 model Category {
   id   Int    @id @default(autoincrement())
-  name String
+  name String @unique
 
   posts Post[]
 }

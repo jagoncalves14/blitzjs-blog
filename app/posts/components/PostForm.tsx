@@ -1,9 +1,13 @@
+import "suneditor/dist/css/suneditor.min.css"
+import "suneditor/dist/css/suneditor.min.css"
+
 import {usePaginatedQuery} from "@blitzjs/core"
 import getCategories from "app/categories/queries/getCategories"
 import {Form, FormProps} from "app/core/components/Form"
 import {LabeledTextField} from "app/core/components/LabeledTextField"
 import {Field} from "react-final-form"
 import CreatableSelect from "react-select/creatable"
+import SunEditor from "suneditor-react"
 import * as z from "zod"
 export {FORM_ERROR} from "app/core/components/Form"
 
@@ -13,10 +17,10 @@ export function PostForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
   return (
     <Form<S> {...props}>
       <LabeledTextField name="title" label="Title" placeholder="Add the title of the post" />
+
       <Field
         name="categories"
         render={({input, meta}) => {
-          window.console.log(input)
           return (
             <>
               <label
@@ -26,7 +30,7 @@ export function PostForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
                 Categories
               </label>
               <CreatableSelect
-                className="mt-0"
+                className="mt-0 z-10"
                 {...input}
                 isMulti
                 isClearable
@@ -35,12 +39,74 @@ export function PostForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
                 getOptionLabel={(option) => option.name || option}
                 getOptionValue={(option) => option.id || option}
                 getNewOptionData={(inputValue, optionLabel) => ({
-                  id: inputValue,
+                  id: inputValue === optionLabel ? 0 : inputValue,
                   name: optionLabel,
                 })}
               />
               {meta.touched && meta.error && <span>{meta.error}</span>}
             </>
+          )
+        }}
+      />
+
+      <Field
+        name="content"
+        render={({input, meta}) => {
+          console.log(input.value)
+          const {
+            align,
+            font,
+            fontColor,
+            fontSize,
+            formatBlock,
+            horizontalRule,
+            image,
+            link,
+            list,
+            paragraphStyle,
+            template,
+            textStyle,
+          } = require("suneditor/src/plugins")
+
+          return (
+            <div>
+              <SunEditor
+                {...input}
+                defaultValue={props.initialValues?.content}
+                setOptions={{
+                  showPathLabel: false,
+                  minHeight: "50vh",
+                  maxHeight: "100vh",
+                  placeholder: "Enter your content here",
+                  plugins: [
+                    align,
+                    font,
+                    fontColor,
+                    fontSize,
+                    formatBlock,
+                    horizontalRule,
+                    list,
+                    paragraphStyle,
+                    template,
+                    textStyle,
+                    image,
+                    link,
+                  ],
+                  buttonList: [
+                    ["undo", "redo"],
+                    ["font", "fontSize", "formatBlock"],
+                    ["paragraphStyle"],
+                    ["bold", "underline", "italic", "strike", "subscript", "superscript"],
+                    "/", // Line break
+                    ["outdent", "indent"],
+                    ["align", "horizontalRule", "list"],
+                    ["link", "image"],
+                  ],
+                  formats: ["p", "div", "h1", "h2", "h3", "h4", "h5", "h6"],
+                }}
+              />
+              {meta.touched && meta.error && <span>{meta.error}</span>}
+            </div>
           )
         }}
       />

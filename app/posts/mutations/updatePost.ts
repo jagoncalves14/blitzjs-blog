@@ -1,11 +1,12 @@
 import {resolver} from "blitz"
-import db, {Category} from "db"
+import db from "db"
 import * as z from "zod"
 
 const UpdatePost = z
   .object({
     id: z.number().int(),
     title: z.string(),
+    content: z.string(),
     published: z.boolean(),
     categories: z.array(
       z.object({
@@ -20,22 +21,18 @@ export default resolver.pipe(
   resolver.zod(UpdatePost),
   resolver.authorize(),
   async ({id, ...data}) => {
-    const connectOrCreate: {create: {name: string}; where: {id: number}}[] = []
-
-    data.categories.forEach((category: Category) => {
-      connectOrCreate.push({
-        where: {
-          id: !Number.isNaN(category.id) ? category.id : 0,
-        },
-        create: {name: category.name},
-      })
-    })
+    delete data.authorId
 
     const payload = {
-      ...data.data,
+      ...data,
       categories: {
         set: [],
-        connectOrCreate,
+        connectOrCreate: data.categories.map((cat) => ({
+          where: {id: cat.id},
+          create: {
+            name: cat.name,
+          },
+        })),
       },
     }
 

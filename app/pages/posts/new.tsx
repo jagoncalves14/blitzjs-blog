@@ -1,7 +1,8 @@
 import Layout from "app/core/layouts/Layout"
 import {FORM_ERROR, PostForm} from "app/posts/components/PostForm"
 import createPost from "app/posts/mutations/createPost"
-import {BlitzPage, useMutation, useRouter, useSession} from "blitz"
+import {BlitzPage, Link, useMutation, useRouter, useSession} from "blitz"
+import {Category, Post} from "db"
 import {Suspense} from "react"
 
 const PostFormHandler = () => {
@@ -20,7 +21,12 @@ const PostFormHandler = () => {
       // initialValues={{}}
       onSubmit={async (values) => {
         try {
-          const payload = Object.assign(values, {authorId: userId})
+          console.log(values)
+          const payload = {
+            ...values,
+            published: values.published || false,
+            authorId: userId,
+          }
           const post = await createPostMutation(payload)
           router.push(`/posts/${post.id}`)
         } catch (error) {
@@ -36,7 +42,15 @@ const PostFormHandler = () => {
 
 const NewPostPage: BlitzPage = () => {
   return (
-    <div className="flex-grow container mx-auto mt-24 sm:px-6">
+    <div className="flex-grow container mx-auto mt-20 sm:px-6 pb-24">
+      <div className="w-full text-right">
+        <Link href="/posts">
+          <a className="text-md font-semibold rounded bg-indigo-600 text-white transition-all py-2 px-6">
+            Back to posts
+          </a>
+        </Link>
+      </div>
+
       <div className="max-w-md">
         <h1 className="text-4xl font-bold mb-8">Create New Post</h1>
 
