@@ -25,11 +25,11 @@ model User {
   updatedAt      DateTime @updatedAt
   firstName      String?
   lastName       String?
+  avatar         String?
   email          String   @unique
   hashedPassword String?
   role           String   @default("user")
 
-  profile  Profile?
   posts    Post[]
   sessions Session[]
   tokens   Token[]
@@ -62,14 +62,6 @@ model Token {
   userId Int
 
   @@unique([hashedToken, type])
-}
-
-model Profile {
-  id     Int    @id @default(autoincrement())
-  bio    String
-  userId Int
-
-  user User @relation(fields: [userId], references: [id])
 }
 
 model Post {
