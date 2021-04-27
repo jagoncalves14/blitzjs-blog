@@ -71,6 +71,7 @@ model Post {
   published Boolean  @default(false)
   title     String
   content   String   @default("")
+  thumbnail String   @default("")
 
   author     User       @relation(fields: [authorId], references: [id])
   categories Category[]

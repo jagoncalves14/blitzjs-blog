@@ -29,6 +29,7 @@ module.exports = {
     "react/display-name": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
+    "sonarjs/no-identical-functions": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "unicorn/prevent-abbreviations": "off",
     "unicorn/no-abusive-eslint-disable": "off",

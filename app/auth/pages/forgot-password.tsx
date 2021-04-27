@@ -43,7 +43,7 @@ const ForgotPasswordPage: BlitzPage = () => {
 }
 
 ForgotPasswordPage.getLayout = (page) => (
-  <Layout title="Blitzerplate - Forgot Your Password?">{page}</Layout>
+  <Layout title="BlitzBlog - Forgot Your Password?">{page}</Layout>
 )
 
 export default ForgotPasswordPage

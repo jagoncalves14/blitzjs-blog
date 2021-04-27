@@ -6,6 +6,7 @@ export interface IUpdatePostPayload {
   authorId: number
   data: {
     title: string
+    thumbnail: string
     content: string
     published: boolean
     categories: Category[]

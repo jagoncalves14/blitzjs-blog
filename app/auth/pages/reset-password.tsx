@@ -52,7 +52,7 @@ const ResetPasswordPage: BlitzPage = () => {
 }
 
 ResetPasswordPage.getLayout = (page) => (
-  <Layout title="Blitzerplate - Reset Your Password">{page}</Layout>
+  <Layout title="BlitzBlog - Reset Your Password">{page}</Layout>
 )
 
 export default ResetPasswordPage

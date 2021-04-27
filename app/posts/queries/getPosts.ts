@@ -18,6 +18,7 @@ export default resolver.pipe(async ({where, orderBy, skip = 0, take = 100}: GetP
           orderBy,
           include: {
             categories: true,
+            tags: true,
           },
         }),
     })

@@ -5,6 +5,7 @@ export interface ICreatePostPayload {
   authorId: number
   data: {
     title: string
+    thumbnail: string
     content: string
     published: boolean
     categories: Category[]

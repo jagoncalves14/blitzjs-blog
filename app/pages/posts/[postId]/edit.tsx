@@ -3,6 +3,7 @@ import {FORM_ERROR, PostForm} from "app/posts/components/PostForm"
 import updatePost from "app/posts/mutations/updatePost"
 import getPost from "app/posts/queries/getPost"
 import {BlitzPage, Head, Link, useMutation, useParam, useQuery, useRouter, useSession} from "blitz"
+import {Category, Tag} from "db"
 import {Suspense} from "react"
 
 const PostFormHandler = () => {
@@ -17,13 +18,22 @@ const PostFormHandler = () => {
     <PostForm
       submitText="Update Post"
       initialValues={post}
-      onSubmit={async (values) => {
+      onSubmit={async (values: {
+        title: string
+        thumbnail: string
+        content: string
+        published: boolean
+        categories: Category[]
+        tags: Tag[]
+      }) => {
         try {
+          window.console.log(values)
           const payload = {
             postId: post.id,
             authorId: userId as number,
             data: {
               title: values.title,
+              thumbnail: values.thumbnail || "",
               content: values.content,
               published: values.published || false,
               categories: values.categories,
@@ -52,7 +62,7 @@ export const EditPost = () => {
   return (
     <>
       <Head>
-        <title>Blitzerplate - Edit {post.title}</title>
+        <title>BlitzBlog - Edit {post.title}</title>
       </Head>
 
       <div className="block space-x-4">

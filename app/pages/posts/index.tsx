@@ -130,6 +130,6 @@ const PostsPage: BlitzPage = () => {
 }
 
 PostsPage.suppressFirstRenderFlicker = true
-PostsPage.getLayout = (page) => <Layout title="Blitzerplate - Posts">{page}</Layout>
+PostsPage.getLayout = (page) => <Layout title="BlitzBlog - Posts">{page}</Layout>
 
 export default PostsPage

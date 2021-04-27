@@ -1,30 +1,78 @@
 import "suneditor/dist/css/suneditor.min.css"
-import "suneditor/dist/css/suneditor.min.css"
 
 import {usePaginatedQuery} from "@blitzjs/core"
 import getCategories from "app/categories/queries/getCategories"
+import Dropzone from "app/core/components/Dropzone"
 import {Form, FormProps} from "app/core/components/Form"
 import {LabeledTextField} from "app/core/components/LabeledTextField"
 import getTags from "app/tags/queries/getTags"
 import {Field} from "react-final-form"
 import CreatableSelect from "react-select/creatable"
 import SunEditor from "suneditor-react"
-import * as z from "zod"
 export {FORM_ERROR} from "app/core/components/Form"
+
+const uploadFile = async (files: any) => {
+  const cloudUrl = "https://api.cloudinary.com/v1_1/deagwncqs/upload"
+  const cloudPreset = "kk9xemf8"
+
+  const formData = new FormData()
+  formData.append("file", files[0])
+  formData.append("upload_preset", cloudPreset)
+
+  const response = await fetch(cloudUrl, {
+    method: "POST",
+    body: formData,
+  })
+  return response.json()
+}
 
 export function PostForm<S extends z.ZodType<any, any>>(props: FormProps<S>) {
   const [{categories}] = usePaginatedQuery(getCategories, {orderBy: {id: "asc"}})
   const [{tags}] = usePaginatedQuery(getTags, {orderBy: {id: "asc"}})
 
-  console.log(props.initialValues)
   return (
     <Form<S> {...props}>
       <LabeledTextField name="title" label="Title" placeholder="Add the title of the post" />
 
+      <div>
+        <label
+          className="flex flex-col align-start text-gray-700 font-bold py-2"
+          htmlFor="Thumbnail Image"
+        >
+          Thumbnail Image
+        </label>
+
+        <Field
+          name="thumbnail"
+          render={({input, meta}) => {
+            return (
+              <>
+                {props.initialValues?.thumbnail && input.value ? (
+                  <>
+                    <img src={props.initialValues?.thumbnail} alt="Thumbnail" />
+                    <button type="button" onClick={() => input.onChange(null)}>
+                      Remove thumbnail
+                    </button>
+                  </>
+                ) : (
+                  <Dropzone
+                    onChange={async (file: any) => {
+                      const response = await uploadFile(file)
+                      input.onChange(response.secure_url)
+                    }}
+                  />
+                )}
+                <input {...input} type="hidden" />
+                {meta.touched && meta.error && <span>{meta.error}</span>}
+              </>
+            )
+          }}
+        />
+      </div>
+
       <Field
         name="content"
         render={({input, meta}) => {
-          console.log(input.value)
           const {
             align,
             font,

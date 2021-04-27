@@ -99,10 +99,9 @@ export default function Layout({title, children}: {title?: string; children: Rea
               <a className="inline-flex justify-center space-x-3 md:justify-start mb-auto">
                 <img
                   className="inline h-8 w-auto sm:h-10"
-                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                  alt="Blitzerplate logo"
+                  src="/images/logo.svg"
+                  alt="BlitzBlog logo"
                 />
-                <span className="self-center text-2xl font-bold">Blitzerplate</span>
               </a>
             </Link>
 
@@ -135,10 +134,9 @@ export default function Layout({title, children}: {title?: string; children: Rea
                 <a className="inline-flex justify-center space-x-3 md:justify-start">
                   <img
                     className="h-8 w-auto sm:h-10"
-                    src="https://tailwindui.com/img/logos/workflow-mark-white.svg"
-                    alt="Blitzerplate logo in white"
+                    src="/images/logo-white.svg"
+                    alt="BlitzBlog logo in white"
                   />
-                  <span className="self-center text-2xl font-bold">Blitzerplate</span>
                 </a>
               </Link>
               <p className="text-center md:max-w-sm md:text-left text-gray-400">

@@ -15,7 +15,7 @@ export const Post = () => {
   return (
     <>
       <Head>
-        <title>Blitzerplate - {post.title}</title>
+        <title>BlitzBlog - {post.title}</title>
       </Head>
 
       <div>
@@ -24,6 +24,7 @@ export const Post = () => {
             Post ID - {post.id}
           </label>
         </div>
+
         {isAuthenticated && (
           <div className="mt-8">
             <Link href={`/posts/${post.id}/edit`}>
@@ -50,6 +51,8 @@ export const Post = () => {
         <h1 className="text-4xl font-bold mt-4 mb-8">{post.title}</h1>
 
         {/* <pre className="rounded bg-indigo-200 p-8">{JSON.stringify(post, null, 2)}</pre> */}
+
+        {post.thumbnail && <img src={post.thumbnail} alt="Thumbnail" />}
 
         <div
           className="inline-block w-full mt-10"
