@@ -1,4 +1,6 @@
-# auth
+# Blitz.js Blog
+
+Boilerplate for writing a blog using Blitz.js.
 
 ## Getting Started
 
